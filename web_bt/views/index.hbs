@@ -1,0 +1,182 @@
+<form name="frm">
+    <div class="container">
+        <div class="row">
+            <h1>Bé tập đếm</h1>
+        </div>
+
+        <br>
+
+        <div class="row" style="text-align: center;">
+            <h3>Họ và tên: Phạm tiến Quân</h3>
+            <h3>MSSV: 19127526</h3>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="input-group -3">
+                    <h5 style="text-align: center;" >Số thứ nhất</h5>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="input-group -3">
+                    <input  name="exp1"  value="{{x}}" type="text"  id="exp1" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" style="width: 20%;">
+                </div>
+            </div>
+
+            <div class="col-lg-2">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="cong">
+                            <label class="form-check-label" for="flexRadioDefault1" >
+                                Cộng
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-check">
+
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="tru"   >
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Trừ
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="input-group -3">
+                    <h5 style="text-align: center;">Số thứ hai</h5>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="input-group -3">
+                    <input   name="exp2"  value="{{y}}" id="exp2" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" style="width: 20%;" >
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="nhan" onclick="">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Nhân
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="chia" onclick="">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Chia
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="input-group -3">
+                    <h5 style="text-align: center;">Kết quả  </h5>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="input-group -3">
+                    <span id="result2" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" style="width: 20%; height: 40px;" disabled> {{this.ketqua}}</span>
+
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <input type="button" class="btn btn-secondary btn-md" id="compute" onclick="Href()" value="Tính">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="input-group -3">
+                    <h5 style="text-align: center;">Thông báo </h5>
+                </div>
+            </div>
+
+            <div class="col-lg-10">
+                <div class="input-group -3">
+                    <h5 style="text-align: center; color: red;" id="thongbao">{{this.noti}} </h5>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    function Href(frm) {
+        var msg_noti="null";
+        var x = (document.getElementById("exp1").value);
+        var y = (document.getElementById("exp2").value);
+        if(x.toString()=="" || y.toString()==""){
+            if(x.toString()=="" && y.toString()==""){
+                msg_noti="Vui lòng nhập Số thứ nhất và số thứ hai";
+            }
+            else if(x.toString()==""){
+                msg_noti="vui lòng nhập số thứ nhất";
+            }
+            else if(y.toString()==""){
+                msg_noti="vui lòng nhập số thứ hai";
+            }
+            location.href="/?x="+x+"&y="+y+"&z=null"+"&noti="+msg_noti;
+            return;
+        }
+        x = Number(document.getElementById("exp1").value);
+        y = Number(document.getElementById("exp2").value);
+        var cong = document.getElementById("cong").checked;
+        var tru = document.getElementById("tru").checked;
+        var nhan = document.getElementById("nhan").checked;
+        var chia = document.getElementById("chia").checked;
+        if(isNaN(x)|| isNaN(y)){
+            if(isNaN(x) && isNaN(y)){
+                msg_noti="Số thứ nhất không hợp lệ\n Số thứ hai không hợp lệ\n Xin vui lòng nhập lại";
+            }
+            else if(isNaN(y)){
+                msg_noti="Số thứ hai không hợp lệ \n Xin vui lòng nhập lại";
+            }
+            else if(isNaN(x)){
+
+                msg_noti="Số thứ nhất không hợp lệ\n Xin vui lòng nhập lại";
+            }
+            location.href="/?x="+x+"&y="+y+"&z=null"+"&noti="+msg_noti;
+        }
+        else{
+            msg_noti="Thực hiện phép tính thành công !!!"
+            if(cong){
+                location.href="/?x="+x+"&y="+y+"&z=cong"+"&noti="+msg_noti;
+            }
+            else if(tru){
+                location.href="/?x="+x+"&y="+y+"&z=tru"+"&noti="+msg_noti;
+            }
+            else if(nhan){
+                location.href="/?x="+x+"&y="+y+"&z=nhan"+"&noti="+msg_noti;
+            }
+            else if(chia){
+                location.href="/?x="+x+"&y="+y+"&z=chia"+"&noti="+msg_noti;
+            }
+            else{
+                msg_noti="Vui lòng chọn phép tính";
+                location.href="/?x="+x+"&y="+y+"&noti="+msg_noti;
+            }
+        }
+    }
+
+</script>
